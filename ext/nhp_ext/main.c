@@ -3,6 +3,4 @@
 
 #include "ruby.h"
 
-void Init_nhp_ext()
-{
-}
+void Init_nhp_ext() {}
