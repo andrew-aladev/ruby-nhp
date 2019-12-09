@@ -11,7 +11,10 @@ def require_header(name, types = [])
   end
 end
 
-require_header "http_parser.h", %w[http_parser http_parser_settings]
+require_header "http_parser.h", %w[
+  http_parser
+  http_parser_settings
+]
 
 def require_library(name, functions)
   functions.each do |function|
@@ -38,6 +41,11 @@ $srcs = %w[
 ]
 .map { |name| "src/#{extension_name}/#{name}.c" }
 .freeze
+
+if ENV["CI"] || ENV["COVERAGE"]
+  $CFLAGS << " --coverage"
+  $LDFLAGS << " --coverage"
+end
 
 $CFLAGS << " -Wno-declaration-after-statement"
 $VPATH << "$(srcdir)/#{extension_name}"

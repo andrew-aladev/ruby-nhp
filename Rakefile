@@ -15,8 +15,8 @@ end
 Rake::TestTask.new do |task|
   task.libs << %w[lib]
 
-  pathes = `find test | grep "\.test\.rb$"`
-  task.test_files = pathes.split "\n"
+  pathes          = `find test | grep "\.test\.rb$"`
+  task.test_files = ["test/coverage.rb"] + pathes.split("\n")
 end
 
 task :default => %i[compile test]
